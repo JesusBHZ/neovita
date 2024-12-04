@@ -6,12 +6,12 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 // Registrar Chart.js solo en el cliente
 const ResultadosPage = () => {
-  const [data, setData] = useState(true);
+  const [data, setData] = useState(null); // Cambiar el estado inicial a null
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       console.log('useEffect ejecutado');
-      
+
       // Registrar los componentes de Chart.js
       ChartJS.register(
         CategoryScale, // Escala de categorías para el eje X
@@ -35,7 +35,7 @@ const ResultadosPage = () => {
           },
         ],
       };
-      
+
       console.log('Datos del gráfico:', chartData);
 
       // Actualizar el estado con los datos
@@ -60,12 +60,12 @@ const ResultadosPage = () => {
   };
 
   // Verificar que los datos estén disponibles antes de renderizar
-  if (!data) return <p>Cargando gráfico...</p>;
+  if (!data) return <p>Cargando gráfico...</p>; // Mostrar mensaje de carga mientras no hay datos
 
   return (
     <div style={{ width: '80%', margin: '0 auto' }}>
       <h1>Gráfico de Resultados</h1>
-      <Bar data={data} options={options} />
+      <Bar data={data} options={options} /> {/* Renderizar el gráfico solo cuando los datos están disponibles */}
     </div>
   );
 };
