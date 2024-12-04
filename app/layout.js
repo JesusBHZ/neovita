@@ -9,11 +9,46 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+
+      <head>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+      </head>
+
       <body>
           <Navbar />
-          <main  className="container mx-auto h-[calc(100vh - 7rem)] flex justify-center items-center">
-            {children}
+          <main>
+            <section id="analytics">
+              <p>Imagen aqui</p>
+            </section>
+            
+            <section id="recientes">
+              <h2>Proyectos Recientes</h2>
+              <div class="contenedor_mayor">
+                <div class="contenedor_menor">
+                  <h4>Primer Proyecto</h4><p>Los</p>
+                </div>
+                <div class="contenedor_menor">
+                  <h4>Segundo Proyecto</h4><p>Revueltos</p>
+                </div>
+              <div class="contenedor_menor">
+                <h4>Tercer Proyecto</h4><p>Y Su Banda</p>
+              </div>
+              </div>
+            </section>
+            
+            <section id="nuevos">
+                <h2>Nuevo Proyecto</h2>
+                <p>Button</p>
+            </section>
           </main>
+          
+          <footer>
+            <a id="derechos-reservados">&copy; 2024 Todos los derechos reservados Neo.Vita Analytics</a>
+            <br></br>
+            <a id="aviso_priv" href="avisopriv.txt"><u>Aviso de Privacidad</u></a>
+            <a id="terms_cond" href="termscond.txt"><u>Terminos y Condiciones</u></a>
+          </footer>
       </body>
     </html>
   );
