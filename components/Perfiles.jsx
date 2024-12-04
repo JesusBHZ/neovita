@@ -1,5 +1,5 @@
 import Link from "next/link";
-import "/workspaces/neovita/app/index.css";
+import "/workspaces/neovita/app/perfiles.css";
 
 function Navbar() {
   return (

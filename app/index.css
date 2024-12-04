@@ -53,8 +53,6 @@ nav ul li a {
 
 /* Ajuste de imagen */
 nav ul li img {
-    width: 10px;
-    height: 10px;
     object-fit: cover; /* Recorta la imagen si no coincide con las dimensiones */
 }
 
@@ -101,7 +99,7 @@ main {
 
 /* Primera seccion */
 #analytics {
-    margin: 50px 50px;
+    margin: 80px 30px 100px;
     padding: 30px 40px;
 }
 
@@ -115,72 +113,71 @@ main {
     text-align: center;
     margin: -20px;
     padding: 20px 20px 100px;
-    background-color: black;
+    background: radial-gradient(circle, #002b1f 15%, black 100%);
 }
 
 #recientes h2 {
     color: white;
     text-align: center;
     font-family: 'Courier New', Courier;
+    font-size: larger;
+    padding-top: 20px;
+    padding-bottom: 100px;
 }
 
 .contenedor_mayor {
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 20px;
     flex-wrap: wrap;
-    text-align: center;
-    gap: 30px;
 }
 
 .contenedor_menor {
-   width: 280px;
-    background-color: rgb(201, 199, 211);
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    max-width: 200px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.contenedor_menor:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 8px 16px 8px rgba(0, 0, 0, 0.5);
 }
 
 .contenedor_menor img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 15px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.contenedor_menor h4 {
-    font-size: 1.5em;
-    margin: 30px 0;
-    color: rgb(0, 0, 124);
+.contenedor_menor p, figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+#recientes #mod {
+    color: white;
+    text-align: left;
     font-family: 'Courier New', Courier;
-    font-weight: bolder;
-    text-shadow: 1px 1px 1px white;
+    font-size: larger;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-left: 25vw;
 }
 
-.contenedor_menor p {
-    font-size: 1em;
-    color: #000000;
-    margin: 10px 0;
-    font-style: italic;
-    text-shadow: 1px 1px 10px white;
+.boton {
+    display: inline-block; /* Asegura que se quede en la misma línea que el h2 */
+    padding: 10px 20px;
+    margin-top: 0; /* Ajusta el margen superior a 0 para que esté al mismo nivel */
+    margin-right: 40vw; /* Espacio a la izquierda (25% del ancho de la ventana) */
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-/* Tercer seccion */
-#nuevos {
-    margin: 50px 50px;
-    padding: 30px 40px;
-}
-
-#nuevos p,h2 {
-    color: black;
-    font-family: 'Courier New', Courier;
+/* Efecto hover para el botón */
+.boton:hover {
+    background-color: white;
+    color: #002b1f;
 }
 
 
@@ -198,13 +195,13 @@ footer {
 }
 
 #aviso_priv {
-    color: blue;
-    text-shadow: 1px 1px 1px aquamarine;
+    color: black;
+    text-shadow: 1px 1px 1px orange;
     margin-right: 20px;
 }
 
 #terms_cond {
-    color: yellow;
-    text-shadow: 1px 1px 1px yellowgreen;
+    color: black;
+    text-shadow: 1px 1px 1px lightskyblue;
     margin-left: 20px;
 }

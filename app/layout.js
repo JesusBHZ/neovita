@@ -26,25 +26,29 @@ export default function RootLayout({ children }) {
               <h2>Proyectos Recientes</h2>
               <div class="contenedor_mayor">
                 <div class="contenedor_menor">
-                  <h4>Primer Proyecto</h4><p>Los</p>
+                  <img src="app/imgenes/Silver Wolf 02.png" alt="Descripción 1"></img>
+                  <p>Descripción breve de la imagen 1</p>
+                  <figcaption>Texto</figcaption>
                 </div>
                 <div class="contenedor_menor">
-                  <h4>Segundo Proyecto</h4><p>Revueltos</p>
+                  <img src="image2.jpg" alt="Descripción 2"></img>
+                  <p>Descripción breve de la imagen 2</p>
+                  <figcaption>Texto</figcaption>
                 </div>
-              <div class="contenedor_menor">
-                <h4>Tercer Proyecto</h4><p>Y Su Banda</p>
+                <div class="contenedor_menor">
+                  <img src="image3.jpg" alt="Descripción 3"></img>
+                  <p>Descripción breve de la imagen 3</p>
+                  <figcaption>Texto</figcaption>
+                </div>
               </div>
-              </div>
+              <h2 id="mod">Nuevo Proyecto</h2>
+                <p class="boton">Button</p>
             </section>
             
-            <section id="nuevos">
-                <h2>Nuevo Proyecto</h2>
-                <p>Button</p>
-            </section>
           </main>
           
           <footer>
-            <a id="derechos-reservados">&copy; 2024 Todos los derechos reservados Neo.Vita Analytics</a>
+          <a id="dr">&copy; 2024 NeoVita Analytics. Todos los derechos reservados.</a>
             <br></br>
             <a id="aviso_priv" href="avisopriv.txt"><u>Aviso de Privacidad</u></a>
             <a id="terms_cond" href="termscond.txt"><u>Terminos y Condiciones</u></a>
