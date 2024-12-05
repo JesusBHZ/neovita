@@ -93,7 +93,12 @@ const LoginForm = () => {
             />
           </div>
           <button type="submit" style={styles.button}>Iniciar Sesión</button>
-        </form>
+          <button
+          style={styles.button}
+          onClick={() => router.push("/registro")}
+        >
+          Registrarse
+        </button>        </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
         {success && <p style={{ color: "green" }}>{success}</p>}
       </div>

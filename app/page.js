@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ref, get } from "firebase/database";
+import { database } from "./lib/firebase"; // Asegúrate de que el archivo `firebase.js` está configurado correctamente
 
 const HomePage = () => {
   const router = useRouter();
@@ -14,15 +16,30 @@ const HomePage = () => {
     if (!proveedorID) {
       router.push("/login");
     } else {
-      // Obtener proyectos si el proveedorID está disponible
+      // Obtener proyectos desde Firebase si el proveedorID está disponible
       const fetchProyectos = async () => {
         try {
-          const response = await fetch("/proyectos");
-          if (!response.ok) {
-            throw new Error("Error al obtener los proyectos.");
+          // Referencia a los proyectos en Firebase
+          const proyectosRef = ref(database, "/proyectos");
+          const snapshot = await get(proyectosRef);
+
+          if (!snapshot.exists()) {
+            throw new Error("No se encontraron proyectos en la base de datos.");
           }
-          const data = await response.json();
-          setProyectos(data);
+
+          const proyectosData = snapshot.val(); // Obtener los datos de proyectos
+          
+          // Filtrar los proyectos donde el idProvedor coincida con el proveedorID del localStorage
+          const proyectosFiltrados = Object.keys(proyectosData).filter(key => {
+            return proyectosData[key].idProvedor === proveedorID;
+          }).map(key => proyectosData[key]);
+
+          // Si no hay proyectos, lanzar un error
+          if (proyectosFiltrados.length === 0) {
+            throw new Error("No se encontraron proyectos para este proveedor.");
+          }
+
+          setProyectos(proyectosFiltrados); // Establecer los proyectos filtrados en el estado
         } catch (err) {
           setError(err.message);
         }
@@ -43,6 +60,7 @@ const HomePage = () => {
           <a href="#" style={styles.navLink}>
             Home
           </a>
+          <a href="/perfil" style={styles.navLink}>Perfil</a>
         </nav>
         <div>
           <button style={styles.navButton}>Log In</button>
@@ -70,7 +88,7 @@ const HomePage = () => {
               </div>
             ))
           ) : (
-            <p>No hay proyectos disponibles.</p>
+            <p>No hay proyectos disponibles para este proveedor.</p>
           )}
         </div>
       </div>
