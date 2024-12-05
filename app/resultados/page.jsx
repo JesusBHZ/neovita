@@ -1,9 +1,227 @@
-"use client";
+import React from "react";
 
-export default function Home() {
+const NuevoProyecto = () => {
   return (
-    <div>
-      <h1>Resultados</h1>
+    <div style={styles.container}>
+      <header style={styles.navbar}>
+        <div style={styles.logo}>N</div>
+        <nav style={styles.navLinks}>
+          <a href="#" style={styles.navLink}>Home</a>
+          <a href="#" style={styles.navLink}>About</a>
+          <a href="#" style={styles.navLink}>Contact</a>
+        </nav>
+        <div>
+          <button style={styles.navButton}>Log In</button>
+          <button style={styles.navButton}>Sign Up</button>
+        </div>
+      </header>
+
+      <div style={styles.formContainer}>
+        <h1 style={styles.title}>Nuevo Proyecto</h1>
+
+        {/* Información General */}
+        <h2 style={styles.sectionTitle}>Información general del proyecto</h2>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Tipo de energía renovable</label>
+          <input type="text" placeholder="Ingrese el tipo" style={styles.input} />
+        </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Descripción del proyecto</label>
+          <textarea placeholder="Descripción" style={styles.textarea} />
+        </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>
+            <input type="checkbox" /> Ubicación Actual
+          </label>
+          <div style={styles.mapPlaceholder}>[Mapa aquí]</div>
+        </div>
+
+        {/* Recursos Naturales */}
+        <h2 style={styles.sectionTitle}>Recursos naturales</h2>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Tipo de terreno</label>
+          <select style={styles.input}>
+            <option>Seleccionar</option>
+            <option>Arenoso</option>
+            <option>Arcilloso</option>
+            <option>Mixto</option>
+          </select>
+        </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Tamaño del terreno (hectáreas)</label>
+          <input type="number" placeholder="500 hectáreas" style={styles.input} />
+        </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Suministro de energía actual (kWh)</label>
+          <input type="number" placeholder="Ingrese cantidad" style={styles.input} />
+        </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Acceso a red eléctrica cercana</label>
+          <select style={styles.input}>
+            <option>Seleccionar</option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Distancia a la red eléctrica (km)</label>
+          <input type="number" placeholder="Ingrese distancia" style={styles.input} />
+        </div>
+
+        {/* Datos Ambientales */}
+        <h2 style={styles.sectionTitle}>Datos ambientales</h2>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Ecosistema local</label>
+          <select style={styles.input}>
+            <option>Seleccionar</option>
+            <option>Bosque</option>
+            <option>Montaña</option>
+            <option>Urbano</option>
+          </select>
+        </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Uso actual del suelo</label>
+          <select style={styles.input}>
+            <option>Seleccionar</option>
+            <option>Agrícola</option>
+            <option>Residencial</option>
+            <option>Comercial</option>
+          </select>
+        </div>
+
+        {/* Datos de Consumo y Demanda */}
+        <h2 style={styles.sectionTitle}>Datos de consumo y demanda</h2>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Consumo energético actual</label>
+          <select style={styles.input}>
+            <option>Seleccionar</option>
+            <option>Bajo</option>
+            <option>Medio</option>
+            <option>Alto</option>
+          </select>
+        </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Usuario final</label>
+          <select style={styles.input}>
+            <option>Seleccionar</option>
+            <option>Residencial</option>
+            <option>Industrial</option>
+            <option>Comercial</option>
+          </select>
+        </div>
+
+        <button style={styles.button}>Crear Proyecto</button>
+        <button style={styles.cancelButton}>Cancelar</button>
+      </div>
     </div>
   );
-}
+};
+
+const styles = {
+  container: {
+    fontFamily: "Arial, sans-serif",
+    textAlign: "left",
+    backgroundColor: "#0F3D47",
+    color: "#fff",
+    minHeight: "100vh",
+    padding: "20px",
+  },
+  navbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "20px",
+  },
+  logo: {
+    fontSize: "24px",
+    fontWeight: "bold",
+    color: "#4CAF50",
+  },
+  navLinks: {
+    display: "flex",
+    gap: "15px",
+  },
+  navLink: {
+    color: "#fff",
+    textDecoration: "none",
+    fontSize: "16px",
+  },
+  navButton: {
+    backgroundColor: "#4CAF50",
+    color: "#fff",
+    border: "none",
+    padding: "10px 15px",
+    borderRadius: "5px",
+    marginLeft: "10px",
+    cursor: "pointer",
+  },
+  formContainer: {
+    backgroundColor: "#153542",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
+  },
+  title: {
+    fontSize: "28px",
+    marginBottom: "20px",
+  },
+  sectionTitle: {
+    fontSize: "20px",
+    marginTop: "20px",
+    marginBottom: "10px",
+  },
+  inputGroup: {
+    marginBottom: "15px",
+  },
+  label: {
+    display: "block",
+    marginBottom: "5px",
+  },
+  input: {
+    width: "100%",
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    fontSize: "14px",
+  },
+  textarea: {
+    width: "100%",
+    padding: "10px",
+    height: "60px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    fontSize: "14px",
+  },
+  mapPlaceholder: {
+    height: "200px",
+    backgroundColor: "#0a2c37",
+    color: "#aaa",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "5px",
+    marginTop: "10px",
+  },
+  button: {
+    width: "100%",
+    padding: "10px",
+    backgroundColor: "#4CAF50",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    marginTop: "20px",
+  },
+  cancelButton: {
+    width: "100%",
+    padding: "10px",
+    backgroundColor: "#ff6347",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    marginTop: "10px",
+  },
+};
+
+export default NuevoProyecto;
