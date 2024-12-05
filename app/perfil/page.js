@@ -1,4 +1,4 @@
-import "/workspaces/neovita/app/perfil/perfil.css";
+import "../perfil.css";
 
 export const metadata = {
   title: "Perfil",
@@ -8,17 +8,15 @@ export const metadata = {
 export default function Perfil() {
   return (
     <div className="perfil-container">
+        
+      <h1 className="nombre-usuario">Juan Pérez</h1>
+      
       <div className="imagen-perfil">
         <img src="perfil.jpg" alt="Imagen de perfil" className="imagen-perfil-img" />
       </div>
 
-      <h1 className="nombre-usuario">Juan Pérez</h1>
-
       <div className="informacion-perfil">
-        <div className="campo">
-          <label htmlFor="empresa">Nombre de la Empresa:</label>
-          <input type="text" id="empresa" value="Empresa XYZ" disabled />
-        </div>
+        
         <div className="campo">
           <label htmlFor="correo">Correo Electrónico:</label>
           <input type="email" id="correo" value="juan@empresa.com" disabled />
