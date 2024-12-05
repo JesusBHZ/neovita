@@ -1,15 +1,154 @@
-import Users from "@/components/Users"
+import React from "react";
 
-async function fetchUsers() {
-  const res = await fetch("https://reqres.in/api/users");
-  const data = await res.json();
-  return data.data;
-}
+const HomePage = () => {
+  return (
+    <div style={styles.container}>
+      {/* Header */}
+      <header style={styles.navbar}>
+        <div style={styles.logo}>
+          <img src="/logo.png" alt="Logo" style={styles.logoImage} />
+          <span style={styles.logoText}>NeoVita</span>
+        </div>
+        <nav style={styles.navLinks}>
+          <a href="#" style={styles.navLink}>Home</a>
+        </nav>
+        <div>
+          <button style={styles.navButton}>Log In</button>
+          <button style={styles.navButton}>Log In</button>
+        </div>
+      </header>
 
-async function HomePage() {
-  const users = await fetchUsers();
-  return <Users users={users} />;
-  
-}
+      {/* Hero Section */}
+      <div style={styles.heroSection}>
+        <h1 style={styles.heroTitle}>NeoVita Analytics</h1>
+        <img src="/solar-panels.jpg" alt="Solar Panels" style={styles.heroImage} />
+      </div>
+
+      {/* Recent Projects Section */}
+      <div style={styles.projectsSection}>
+        <h2 style={styles.sectionTitle}>Proyectos recientes</h2>
+        <div style={styles.projectsGrid}>
+          <div style={styles.projectCard}>
+            <div style={styles.projectContent}></div>
+            <p>New product</p>
+          </div>
+          <div style={styles.projectCard}>
+            <div style={styles.projectContent}></div>
+            <p>Cool new blog</p>
+          </div>
+          <div style={styles.projectCard}>
+            <div style={styles.projectContent}></div>
+            <p>Our people</p>
+          </div>
+        </div>
+      </div>
+
+      {/* New Project Section */}
+      <div style={styles.newProjectSection}>
+        <h2 style={styles.newProjectTitle}>Nuevo proyecto</h2>
+        <button style={styles.newProjectButton}>Button</button>
+      </div>
+    </div>
+  );
+};
+
+const styles = {
+  container: {
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#0F3D47",
+    color: "#fff",
+    minHeight: "100vh",
+    textAlign: "center",
+  },
+  navbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "20px",
+    borderBottom: "1px solid #fff",
+  },
+  logo: {
+    display: "flex",
+    alignItems: "center",
+  },
+  logoImage: {
+    height: "40px",
+    marginRight: "10px",
+  },
+  logoText: {
+    fontSize: "24px",
+    color: "#4CAF50",
+  },
+  navLinks: {
+    display: "flex",
+    gap: "15px",
+  },
+  navLink: {
+    color: "#fff",
+    textDecoration: "none",
+    fontSize: "16px",
+  },
+  navButton: {
+    backgroundColor: "#4CAF50",
+    color: "#fff",
+    border: "none",
+    padding: "10px 15px",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+  heroSection: {
+    padding: "40px",
+    textAlign: "center",
+  },
+  heroTitle: {
+    fontSize: "36px",
+    marginBottom: "20px",
+  },
+  heroImage: {
+    width: "100%",
+    maxHeight: "400px",
+    objectFit: "cover",
+  },
+  projectsSection: {
+    padding: "40px",
+  },
+  sectionTitle: {
+    fontSize: "28px",
+    marginBottom: "20px",
+  },
+  projectsGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "20px",
+  },
+  projectCard: {
+    backgroundColor: "#153542",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+    textAlign: "left",
+  },
+  projectContent: {
+    height: "100px",
+    backgroundColor: "#4CAF50",
+    marginBottom: "10px",
+  },
+  newProjectSection: {
+    padding: "40px",
+    textAlign: "center",
+  },
+  newProjectTitle: {
+    fontSize: "28px",
+    marginBottom: "20px",
+  },
+  newProjectButton: {
+    padding: "10px 20px",
+    backgroundColor: "#4CAF50",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
 
 export default HomePage;
