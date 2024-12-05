@@ -1,6 +1,54 @@
+"use client";
 import React from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ref, get } from "firebase/database";
+import { database } from "./lib/firebase";
+
 
 const HomePage = () => {
+
+  const router = useRouter();
+  const [proyectos, setProyectos] = useState([]);
+  const [error, setError] = useState(null);
+
+  // Verificar localStorage y redirigir si no existe proveedorID
+  useEffect(() => {
+    const proveedorID = localStorage.getItem("proveedorID");
+    if (!proveedorID) {
+      router.push("/login");
+    } else {
+      // Obtener proyectos desde Firebase si el proveedorID está disponible
+      const fetchProyectos = async () => {
+        try {
+          // Referencia a los proyectos en Firebase
+          const proyectosRef = ref(database, "/proyectos");
+          const snapshot = await get(proyectosRef);
+
+          if (!snapshot.exists()) {
+            throw new Error("No se encontraron proyectos en la base de datos.");
+          }
+
+          const proyectosData = snapshot.val(); // Obtener los datos de proyectos
+          
+          // Filtrar los proyectos donde el idProvedor coincida con el proveedorID del localStorage
+          const proyectosFiltrados = Object.keys(proyectosData).filter(key => {
+            return proyectosData[key].idProvedor === proveedorID;
+          }).map(key => proyectosData[key]);
+
+          // Si no hay proyectos, lanzar un error
+          if (proyectosFiltrados.length === 0) {
+            throw new Error("No se encontraron proyectos para este proveedor.");
+          }
+
+          setProyectos(proyectosFiltrados); // Establecer los proyectos filtrados en el estado
+        } catch (err) {
+          setError(err.message);
+        }
+      };
+      fetchProyectos();
+    }
+  }, [router]);
   return (
     <div style={styles.container}>
       {/* Header */}
@@ -14,7 +62,7 @@ const HomePage = () => {
         </nav>
         <div>
           <button style={styles.navButton}>Log In</button>
-          <button style={styles.navButton}>Log In</button>
+          <button style={styles.navButton}>Sign In</button>
         </div>
       </header>
 
@@ -27,26 +75,31 @@ const HomePage = () => {
       {/* Recent Projects Section */}
       <div style={styles.projectsSection}>
         <h2 style={styles.sectionTitle}>Proyectos recientes</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <div style={styles.projectsGrid}>
-          <div style={styles.projectCard}>
-            <div style={styles.projectContent}></div>
-            <p>New product</p>
-          </div>
-          <div style={styles.projectCard}>
-            <div style={styles.projectContent}></div>
-            <p>Cool new blog</p>
-          </div>
-          <div style={styles.projectCard}>
-            <div style={styles.projectContent}></div>
-            <p>Our people</p>
-          </div>
-        </div>
-      </div>
+          {proyectos.length > 0 ? (
+            proyectos.map((proyecto, index) => (
+              <div key={index} style={styles.projectCard}>
+                <div style={styles.projectContent}></div>
+                <h3>{proyecto.nombre}</h3>
+                <p>{proyecto.descripcion}</p>
+              </div>
+            ))
+          ) : (
+            <p>No hay proyectos disponibles para este proveedor.</p>
+          )}
 
+      </div>
+      </div>     
       {/* New Project Section */}
       <div style={styles.newProjectSection}>
         <h2 style={styles.newProjectTitle}>Nuevo proyecto</h2>
-        <button style={styles.newProjectButton}>Button</button>
+        <button
+          style={styles.newProjectButton}
+          onClick={() => router.push("/proyecto")}
+        >
+          Crear Proyecto
+        </button>
       </div>
     </div>
   );

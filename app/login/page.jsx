@@ -51,7 +51,7 @@ const LoginForm = () => {
         setSuccess("Inicio de sesión exitoso.");
         localStorage.setItem("proveedorID", proveedor.id);
         localStorage.setItem("proveedorCorreo", proveedor.correo);
-        router.push("/home");
+        router.push("/");
       }
     } catch (e) {
       setError(e.message);
