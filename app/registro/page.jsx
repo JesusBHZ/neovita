@@ -88,7 +88,8 @@ const CreateAccountForm = () => {
           </a>
         </nav>
         <div>
-          <button style={styles.navButton}>Log In</button>
+          <button style={styles.navButton}
+           onClick={() => router.push("/login")}>Log In</button>
           <button style={styles.navButton}>Sign Up</button>
         </div>
       </header>
@@ -97,7 +98,7 @@ const CreateAccountForm = () => {
         <div style={styles.formContainer}>
           <h1 style={styles.title}>Crear cuenta</h1>
           <p style={styles.subtitle}>
-            ¿Tienes una cuenta? <a href="/inicio" style={styles.link}>Inicia sesión</a>
+            ¿Tienes una cuenta? <a href="/login" style={styles.link}>Inicia sesión</a>
           </p>
           {error && <p style={{ color: "red" }}>{error}</p>}
           {success && <p style={{ color: "green" }}>¡Cuenta creada exitosamente!</p>}

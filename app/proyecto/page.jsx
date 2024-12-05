@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 
 import { useRouter } from "next/navigation"; // Importamos el hook para redirección
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css'; // Necesario para los estilos de Leaflet
 import { ref, set, push } from "firebase/database"; // Asegúrate de usar 'set' o 'push'
 import { database } from "../lib/firebase"; // Ajusta esta ruta a la ubicación correcta de tu archivo de configuración de Firebase
@@ -171,7 +170,7 @@ const NuevoProyecto = () => {
             value={tipoEnergia}
             onChange={(e) => setTipoEnergia(e.target.value)}
             required
-            style={{ padding: "8px", width: "100%" }}
+            style={{ padding: "8px", width: "100%", color: "#333" }}
           >
             <option value="">Seleccione un tipo de energía</option>
             <option value="Solar">Solar</option>
@@ -239,7 +238,7 @@ const NuevoProyecto = () => {
             value={tipoTerreno}
             onChange={(e) => setTipoTerreno(e.target.value)}
             required
-            style={{ padding: "8px", width: "100%" }}
+            style={{ padding: "8px", width: "100%", color: "#333"}}
           >
             <option value="">Seleccione un tipo de terreno</option>
             <option value="Rocoso">Rocoso</option>
@@ -267,7 +266,7 @@ const NuevoProyecto = () => {
             value={suministroEnergia}
             onChange={(e) => setSuministroEnergia(e.target.value)}
             required
-            style={{ padding: "8px", width: "100%" }}
+            style={{ padding: "8px", width: "100%", color: "#333" }}
           />
         </div>
 

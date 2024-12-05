@@ -58,10 +58,12 @@ const HomePage = () => {
           <span style={styles.logoText}>NeoVita</span>
         </div>
         <nav style={styles.navLinks}>
-          <a href="#" style={styles.navLink}>Home</a>
+          <a href="/perfil" style={styles.navLink}>Perfil</a>
         </nav>
         <div>
-          <button style={styles.navButton}>Log In</button>
+          <button style={styles.navButton}
+          >Log In</button>
+
           <button style={styles.navButton}>Sign In</button>
         </div>
       </header>
@@ -146,6 +148,7 @@ const styles = {
     color: "#fff",
     border: "none",
     padding: "10px 15px",
+    margin: "6px",
     borderRadius: "5px",
     cursor: "pointer",
   },

@@ -76,7 +76,9 @@ const LoginForm = () => {
         </nav>
         <div>
           <button style={styles.navButton}>Log In</button>
-          <button style={styles.navButton}>Log In</button>
+          <button style={styles.navButton}
+          onClick={() => router.push("/registro")}
+          >Sign In</button>
         </div>
       </header>
 
