@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f2a3e;
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .perfil-container {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .imagen-perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border-radius: 50%;
+  }
+  
+  .informacion-perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .campo {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #36b645;
+    color: #fff;
+  }
+  
+  input::placeholder {
+    color: #ffffff;
+  }
+  
+  input:disabled {
+    background-color: #36b645;
+    opacity: 0.9;
+  }
+  
