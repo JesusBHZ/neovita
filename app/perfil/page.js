@@ -1,42 +1,47 @@
-import "../perfil.css";
+import React from "react";
+import "/workspaces/neovita/app/perfil.css";
 
 export const metadata = {
   title: "Perfil",
   description: "Perfil de Usuario",
 };
 
+const CampoPerfil = ({ label, id, value, type = "text" }) => (
+  <div className="campo">
+    <label htmlFor={id}>{label}</label>
+    <input type={type} id={id} value={value} disabled />
+  </div>
+);
+
 export default function Perfil() {
+  const usuario = {
+    nombre: "Juan Pérez",
+    imagen: "perfil.jpg",
+    correo: "juan@empresa.com",
+    contraseña: "******",
+    direccion: "Calle Ficticia 123, Ciudad",
+    encargado: "Ana García",
+    telefono: "123-456-7890",
+  };
+
   return (
     <div className="perfil-container">
-        
-      <h1 className="nombre-usuario">Juan Pérez</h1>
-      
+      <h1 className="nombre-usuario">{usuario.nombre}</h1>
+
       <div className="imagen-perfil">
-        <img src="perfil.jpg" alt="Imagen de perfil" className="imagen-perfil-img" />
+        <img
+          src={usuario.imagen}
+          alt={`Imagen de perfil de ${usuario.nombre}`}
+          className="imagen-perfil-img"
+        />
       </div>
 
       <div className="informacion-perfil">
-        
-        <div className="campo">
-          <label htmlFor="correo">Correo Electrónico:</label>
-          <input type="email" id="correo" value="juan@empresa.com" disabled />
-        </div>
-        <div className="campo">
-          <label htmlFor="contraseña">Contraseña:</label>
-          <input type="password" id="contraseña" value="******" disabled />
-        </div>
-        <div className="campo">
-          <label htmlFor="direccion">Dirección:</label>
-          <input type="text" id="direccion" value="Calle Ficticia 123, Ciudad" disabled />
-        </div>
-        <div className="campo">
-          <label htmlFor="encargado">Nombre del Encargado:</label>
-          <input type="text" id="encargado" value="Ana García" disabled />
-        </div>
-        <div className="campo">
-          <label htmlFor="telefono">Número Telefónico:</label>
-          <input type="tel" id="telefono" value="123-456-7890" disabled />
-        </div>
+        <CampoPerfil label="Correo Electrónico:" id="correo" value={usuario.correo} type="email" />
+        <CampoPerfil label="Contraseña:" id="contraseña" value={usuario.contraseña} type="password" />
+        <CampoPerfil label="Dirección:" id="direccion" value={usuario.direccion} />
+        <CampoPerfil label="Nombre del Encargado:" id="encargado" value={usuario.encargado} />
+        <CampoPerfil label="Número Telefónico:" id="telefono" value={usuario.telefono} type="tel" />
       </div>
     </div>
   );

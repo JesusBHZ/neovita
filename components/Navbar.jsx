@@ -6,7 +6,7 @@ function Navbar() {
     <nav>
       <ul>
         <div class="nav_izq">
-          <li><img src="/workspaces/neovita/app/imagenes/Neo Vita Logo.png" alt="Hola"></img></li>
+          <li><a href="#logo">Logo</a></li>
           <li><a href="#home">Home</a></li>
         </div>
         <div class="nav_espacio"></div>
