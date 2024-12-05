@@ -329,6 +329,21 @@ useEffect(() => {
           }}>
             Enviar Proyecto
           </button>
+
+          <button
+        onClick={() => router.push("/home")}
+        style={{
+          marginTop: "20px",
+          backgroundColor: "#007BFF",
+          color: "white",
+          padding: "10px",
+          border: "none",
+          borderRadius: "4px",
+          width: "100%",
+        }}
+      >
+        Cancelar
+      </button>
         </div>
 
         {/* Mensajes de error y éxito */}
