@@ -129,8 +129,8 @@ const NuevoProyecto = () => {
 
       const datos = await respuesta.json();
       setResultado(`¡Éxito! Respuesta: ${JSON.stringify(datos)}`);
-      localStorage.setItem('response', JSON.stringify(datos));
-      window.location.assign(`/resultados/${idProvedor}`);
+      localStorage.setItem("response", JSON.stringify(datos));
+      router.push(`/resultados/${idProvedor}`);
       return datos;
     } catch (error) {
       setResultado(`Error: ${error.message}`);
@@ -197,20 +197,10 @@ const NuevoProyecto = () => {
       <header style={styles.navbar}>
         <div style={styles.logo}>N</div>
         <nav style={styles.navLinks}>
-          <a href="#" style={styles.navLink}>
+          <a href="" style={styles.navLink}>
             Home
           </a>
-          <a href="#" style={styles.navLink}>
-            About
-          </a>
-          <a href="#" style={styles.navLink}>
-            Contact
-          </a>
         </nav>
-        <div>
-          <button style={styles.navButton}>Log In</button>
-          <button style={styles.navButton}>Log In</button>
-        </div>
       </header>
 
       <div style={styles.formContainer}>
@@ -342,7 +332,7 @@ const NuevoProyecto = () => {
               value={accesoRedElectrica}
               onChange={(e) => setAccesoRedElectrica(e.target.value)}
               required
-              style={{ padding: "8px", width: "100%" }}
+              style={{ padding: "8px", width: "100%", color: "#333" }}
             />
           </div>
 
@@ -353,7 +343,7 @@ const NuevoProyecto = () => {
               value={distanciaRedElectrica}
               onChange={(e) => setDistanciaRedElectrica(e.target.value)}
               required
-              style={{ padding: "8px", width: "100%" }}
+              style={{ padding: "8px", width: "100%", color: "#333" }}
             />
           </div>
 
@@ -363,19 +353,35 @@ const NuevoProyecto = () => {
               value={ecosistemaLocal}
               onChange={(e) => setEcosistemaLocal(e.target.value)}
               required
-              style={{ padding: "8px", width: "100%", minHeight: "100px" }}
+              style={{
+                padding: "8px",
+                width: "100%",
+                minHeight: "100px",
+                color: "#333",
+              }}
             />
           </div>
 
           <div style={{ marginBottom: "10px" }}>
             <label>Uso del Suelo:</label>
-            <input
-              type="text"
+            <select
               value={usoSuelo}
               onChange={(e) => setUsoSuelo(e.target.value)}
               required
-              style={{ padding: "8px", width: "100%" }}
-            />
+              style={{ padding: "8px", width: "100%", color: "#333" }}
+            >
+              <option value="">Seleccione un tipo de terreno</option>
+              <option value="Residencial">Residencial</option>
+              <option value="Comercial">Comercial</option>
+              <option value="Industrial">Industrial</option>
+              <option value="Agrícola">Agrícola</option>
+              <option value="Recreativo">Recreativo</option>
+              <option
+                value="Equipamiento urbano"
+              >
+                Equipamiento urbano
+              </option>
+            </select>
           </div>
 
           <div style={{ marginBottom: "10px" }}>
@@ -385,7 +391,7 @@ const NuevoProyecto = () => {
               value={consumoEnergetico}
               onChange={(e) => setConsumoEnergetico(e.target.value)}
               required
-              style={{ padding: "8px", width: "100%" }}
+              style={{ padding: "8px", width: "100%", color: "#333" }}
             />
           </div>
 
@@ -396,7 +402,7 @@ const NuevoProyecto = () => {
               value={usuarioFinal}
               onChange={(e) => setUsuarioFinal(e.target.value)}
               required
-              style={{ padding: "8px", width: "100%" }}
+              style={{ padding: "8px", width: "100%", color: "#333" }}
             />
           </div>
 
