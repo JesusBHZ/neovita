@@ -1,6 +1,64 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { database } from "../lib/firebase";
+import { ref, get } from "firebase/database";
 
 const LoginForm = () => {
+  const [correo, setCorreo] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const router = useRouter();
+
+  const formatEmailForFirebase = (email) => email.replace(/\./g, "_");
+
+  const comprobarCredenciales = async (correo, contrasena) => {
+    try {
+      const proveedoresRef = ref(database, "provedores/");
+      const snapshot = await get(proveedoresRef);
+
+      if (snapshot.exists()) {
+        const proveedores = snapshot.val();
+        for (const key in proveedores) {
+          const userData = proveedores[key];
+          if (userData.correo === correo && userData.contrasena === contrasena) {
+            return { id: key, correo };
+          }
+        }
+        throw new Error("Usuario o contraseña incorrectos.");
+      } else {
+        throw new Error("No hay proveedores registrados.");
+      }
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(false);
+
+    if (!correo || !contrasena) {
+      setError("Todos los campos son obligatorios.");
+      return;
+    }
+
+    try {
+      const proveedor = await comprobarCredenciales(correo, contrasena);
+      if (proveedor) {
+        setSuccess("Inicio de sesión exitoso.");
+        localStorage.setItem("proveedorID", proveedor.id);
+        localStorage.setItem("proveedorCorreo", proveedor.correo);
+        router.push("/home");
+      }
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
+
   return (
     <div style={styles.container}>
       <header style={styles.navbar}>
@@ -23,17 +81,32 @@ const LoginForm = () => {
       </header>
 
       <div style={styles.loginContainer}>
-        <h1 style={styles.title}>Login</h1>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Correo Electrónico</label>
-          <input type="email" placeholder="Text" style={styles.input} />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Contraseña</label>
-          <input type="password" placeholder="Text" style={styles.input} />
-        </div>
-        <button style={styles.button}>Inicio de sesión</button>
-        <button style={styles.button}>Registro</button>
+        <h1 style={styles.title}>Inicio de Sesión</h1>
+        <form onSubmit={handleSubmit}>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Correo Electrónico:</label>
+            <input
+              type="email"
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
+              style={styles.input}
+              required
+            />
+          </div>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Contraseña:</label>
+            <input
+              type="password"
+              value={contrasena}
+              onChange={(e) => setContrasena(e.target.value)}
+              style={styles.input}
+              required
+            />
+          </div>
+          <button type="submit" style={styles.button}>Iniciar Sesión</button>
+        </form>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {success && <p style={{ color: "green" }}>{success}</p>}
       </div>
     </div>
   );
@@ -104,6 +177,7 @@ const styles = {
     border: "1px solid #ccc",
     borderRadius: "5px",
     fontSize: "14px",
+    color: "#333",
   },
   button: {
     width: "100%",

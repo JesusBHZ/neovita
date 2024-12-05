@@ -1,6 +1,77 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { ref, set } from "firebase/database";
+import { database } from "../lib/firebase";
+import { useRouter } from "next/navigation";
 
 const CreateAccountForm = () => {
+
+  const [nombreEmpresa, setNombreEmpresa] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [representante, setRepresentante] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+
+  const router = useRouter();
+
+  const generarIdAleatorio = () => {
+    return Math.random().toString(36).substr(2, 9);
+  };
+
+  const subirDato = async (id, correo, nombreEmpresa, telefono, contrasena, direccion, representante) => {
+    try {
+      const userRef = ref(database, "provedores/" + id);
+      await set(userRef, {
+        correo,
+        nombreEmpresa,
+        telefono,
+        contrasena,
+        direccion,
+        representante,
+        fechaCreacion: new Date().toISOString(),
+      });
+      console.log("Usuario agregado exitosamente");
+    } catch (e) {
+      console.error("Error al agregar usuario:", e);
+      throw e;
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!correo || !nombreEmpresa || !telefono || !contrasena || !direccion || !representante) {
+      setError("Todos los campos son obligatorios.");
+      return;
+    }
+
+    try {
+      const idAleatorio = generarIdAleatorio();
+      await subirDato(idAleatorio, correo, nombreEmpresa, telefono, contrasena, direccion, representante);
+      setSuccess(true);
+      setError(null);
+      limpiarCampos();
+      alert("Registro exitoso. Por favor, inicia sesión.");
+
+    // Redirigir al usuario a la página de inicio de sesión
+      router.push("/login"); // Redirect after success
+    } catch (error) {
+      setError("Hubo un error al subir los datos.");
+    }
+  };
+
+  const limpiarCampos = () => {
+    setNombreEmpresa("");
+    setCorreo("");
+    setTelefono("");
+    setContrasena("");
+    setDireccion("");
+    setRepresentante("");
+  };
+
   return (
     <div style={styles.container}>
       <header style={styles.navbar}>
@@ -18,37 +89,83 @@ const CreateAccountForm = () => {
         </nav>
         <div>
           <button style={styles.navButton}>Log In</button>
-          <button style={styles.navButton}>Log In</button>
+          <button style={styles.navButton}>Sign Up</button>
         </div>
       </header>
 
-      <div style={styles.formContainer}>
-        <h1 style={styles.title}>Crear cuenta</h1>
-        <p style={styles.subtitle}>
-          ¿Tienes una cuenta? <a href="#" style={styles.link}>Inicia sesión</a>
-        </p>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Nombre de empresa</label>
-          <input type="text" placeholder="Text Field" style={styles.input} />
+      <form onSubmit={handleSubmit}>
+        <div style={styles.formContainer}>
+          <h1 style={styles.title}>Crear cuenta</h1>
+          <p style={styles.subtitle}>
+            ¿Tienes una cuenta? <a href="/inicio" style={styles.link}>Inicia sesión</a>
+          </p>
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {success && <p style={{ color: "green" }}>¡Cuenta creada exitosamente!</p>}
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Nombre de empresa</label>
+            <input
+              type="text"
+              value={nombreEmpresa}
+              onChange={(e) => setNombreEmpresa(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Correo electrónico</label>
+            <input
+              type="email"
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Teléfono</label>
+            <input
+              type="number"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Nombre del representante</label>
+            <input
+              type="text"
+              value={representante}
+              onChange={(e) => setRepresentante(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Contraseña</label>
+            <input
+              type="password"
+              value={contrasena}
+              onChange={(e) => setContrasena(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.inputGroup}>
+            <label style={styles.label}>Dirección</label>
+            <input
+              type="text"
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
+              required
+              style={styles.input}
+            />
+          </div>
+          <button type="submit" style={styles.submitButton}>
+            Crear cuenta
+          </button>
         </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Correo electrónico</label>
-          <input type="email" placeholder="Text field" style={styles.input} />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Contraseña</label>
-          <input type="password" placeholder="Password" style={styles.input} />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Dirección</label>
-          <input type="text" placeholder="Text field" style={styles.input} />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Nombre del representante</label>
-          <input type="text" placeholder="Text field" style={styles.input} />
-        </div>
-        <button style={styles.submitButton}>Crear cuenta</button>
-      </div>
+      </form>
     </div>
   );
 };
@@ -129,6 +246,7 @@ const styles = {
     border: "2px solid #fff",
     borderRadius: "15px",
     fontSize: "14px",
+    color: "#333",
   },
   submitButton: {
     width: "100%",
